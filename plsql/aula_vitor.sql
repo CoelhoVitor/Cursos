@@ -85,7 +85,7 @@ select * from compras join lojas on lojas_id = lojas.id;
 
 #######################################################################################################################################
 
-select múltiplo
+selecionar múltiplos
 
 select * from nomes, nomes n2 # mostra todas as duplas combinações possíveis entre os nomes da tabela
 
