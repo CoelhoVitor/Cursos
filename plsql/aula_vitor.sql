@@ -3,7 +3,7 @@ criar tabela com formas de pagamento (enum só recebe os dados setados)
 create type enum_pagamento as enum ('cartao', 'boleto', 'dinheiro');
 
 alter table compras add column form_pagto enum_pagamento;
-
+      
 inserindo
 
 insert into compras (valor, data, descricao, recebido, form_pagto) values (100, '01-01-2013', 'comida', 1, 'cartao');
