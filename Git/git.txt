@@ -1,0 +1,73 @@
+﻿git pull from master into the development branch
+
+git checkout development
+git fetch origin
+git merge origin/master
+
+============================================================================================================================================
+
+delete git project
+
+git checkout master
+git rm -r folder-name
+git commit -m "Remove directory"
+git push origin master
+
+============================================================================================================================================
+
+git rebase to master from development branch
+
+git checkout master
+git pull
+git rebase master development
+
+============================================================================================================================================
+git push to master
+
+git checkout master
+git pull               # to update the state to the latest remote master state
+git merge develop      # to bring changes to local master from your develop branch
+git push origin master # push current HEAD to remote master branch
+
+============================================================================================================================================
+
+check existings branchs
+
+git branch
+
+============================================================================================================================================
+
+git push (to any branch)
+
+git checkout development
+git add file-name
+git commit -m "commit-message"
+git push development
+
+============================================================================================================================================
+some git utilits
+
+git clone [url]
+git status
+git log --pretty
+git log -p 	//dif
+
+============================================================================================================================================
+alias
+
+vim ~/.gitconfig
+
+[alias]
+st = status
+co = checkout
+envia = !git checkout master && git pull && git checkout desenvolvimento && git rebase master && git checkout master && git merge desenvolvimento && git push
+
+publica = !git checkout master && git pull && git checkout dev && git rebase master && git checkout master && git merge dev && git push
+
+git checkout master: altera o local de trabalho para a branch master
+git pull: atualiza o histórico da branch master
+git checkout dev: altera o local de trabalho para a branch dev
+git rebase master: atualiza o HEAD da branch dev para receber as alterações da branch master
+git checkout master: altera o local de trabalho novamente para a branch master
+git merge dev: mescla as alterações da branch dev na master
+git push: envia suas alterações para o repositório remoto

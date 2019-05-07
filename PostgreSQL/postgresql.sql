@@ -1,3 +1,92 @@
+criar banco de dados
+
+CREATE DATABASE controle_compras;
+
+#######################################################################################################################################
+
+listar bancos de dados
+
+\l
+
+#######################################################################################################################################
+
+lista de relações
+
+\d
+
+#######################################################################################################################################
+
+conectar banco de dados
+
+\c controle_compras;
+
+#######################################################################################################################################
+
+criar tabela
+
+CREATE TABLE compras (id serial primary key, 	# valor sequencial, chave primária
+						data date,				# Date
+						valor decimal, 			# float
+						descricao varchar(250),	# string de 250 chars
+						recebido smallint);		# "boolean" => 0 = não recebido, 1 = recebido 
+
+#######################################################################################################################################
+
+inserir valores
+
+INSERT INTO compras (valor, data, descricao, recebido) VALUES (100.0, '2019-04-22', 'presente de namoro', 1);
+
+#######################################################################################################################################
+
+selecionar inserções
+
+# tudo
+SELECT * FROM compras;
+
+# like
+SELECT * FROM compras WHERE descricao LIKE 'COMPRAS%';
+
+# between
+SELECT valor, data, descricao FROM compras WHERE data BETWEEN '01-01-2019' and '12-31-2019' AND NOT valor < 20;
+
+# altera padrão data
+SELECT id, data, to_char(data, 'dd-mm-yyyy') as DataFormatada from compras;
+
+#######################################################################################################################################
+
+inserir de arquivo
+
+\i path_name/archive.sql
+\i C:/Users/lfeli/Downloads/dump-postgres.sql
+
+#######################################################################################################################################
+
+
+atualizar valores
+
+linha errada: "46 | 2000 | 2011-09-03 | NOME | 1"
+mudar de 03/09 para 09/03
+
+update compras set data = '03-09-2011' where id = 46;
+
+#######################################################################################################################################
+
+deletar inserções
+
+delete from compras where data between '2009-01-01' and '2009-12-31';
+
+#######################################################################################################################################
+
+alterar tabela/coluna
+
+# valores not null
+ALTER TABLE compras ALTER COLUMN valor SET NOT NULL;
+
+# valores default
+ALTER TABLE compras ALTER COLUMN valor SET DEFAULT 0;
+
+#######################################################################################################################################
+
 criar tabela com formas de pagamento (enum só recebe os dados setados)
 
 create type enum_pagamento as enum ('cartao', 'boleto', 'dinheiro');

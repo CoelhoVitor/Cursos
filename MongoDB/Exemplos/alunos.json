@@ -1,0 +1,44 @@
+[
+    {
+        "nome" : "Vitor",
+        "localizacao" : {
+            "coordinates" : [-23.950420, -46.342540],
+            "type" : "Point"
+        }
+    },
+    {
+        "nome" : "Gabriela",
+        "localizacao" : {
+            "coordinates" : [-23.959360, -46.335542],
+            "type" : "Point"
+        }
+    },
+    {
+        "nome" : "Marcelo",
+        "localizacao" : {
+            "coordinates" : [-23.950420, -46.342540],
+            "type" : "Point"
+        }
+    },
+    {
+        "nome" : "Moreira",
+        "localizacao" : {
+            "coordinates" : [-23.951907, -46.345306],
+            "type" : "Point"
+        }
+    },
+    {
+        "nome" : "Ray",
+        "localizacao" : {
+            "coordinates" : [-23.955012, -46.345523],
+            "type" : "Point"
+        }
+    },
+    {
+        "nome" : "Panao",
+        "localizacao" : {
+            "coordinates" : [-23.955017, -46.342010],
+            "type" : "Point"
+        }
+    }
+]
