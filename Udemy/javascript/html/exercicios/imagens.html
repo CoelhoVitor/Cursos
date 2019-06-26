@@ -1,0 +1,79 @@
+<div wm-slider>
+  <p>
+    <img src="http://files.cod3r.com.br/curso-web/imagem1.jpg" alt="Muro da Cidade" width="513" height="342"
+      title="Muro da Cidade por Tardo Bessa">
+  </p>
+
+  <p>
+    <img src="http://files.cod3r.com.br/curso-web/imagem2.gif" alt="Intro Cod3r" height="342">
+  </p>
+
+  <p class="circular">
+    <img src="http://files.cod3r.com.br/curso-web/imagem3.png" alt="Rio de Janeiro" height="342">
+  </p>
+
+  <p class="texto">
+    <img src="http://files.cod3r.com.br/curso-web/avatar.jpg" alt="Avatar" height="50" align="left">
+    Aaaaaaaaaaaaaaaaaaa a aaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa a
+    aaa a a aaaaa a a aaaaaaaaaa a a a aaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaa a a a a
+  </p>
+
+  <p class="cidade"></p>
+
+  <p>
+    <picture>
+      <source srcset="http://files.cod3r.com.br/curso-web/logo-larga.png" media="(min-width: 600px)">
+      <img src="http://files.cod3r.com.br/curso-web/logo-estreita.png" alt="Logo">
+    </picture>
+  </p>
+</div>
+
+<style>
+  p {
+    position: absolute;
+    display: none;
+  }
+
+  .circular {
+    width: 513px;
+    background-color: #000000;
+  }
+
+  .texto {
+    width: 300px;
+  }
+
+  .texto img {
+    margin-right: 10px;
+  }
+
+  .cidade {
+    width: 513px;
+    height: 342px;
+    background-image: url('http://files.cod3r.com.br/curso-web/imagem4.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 200%;
+  }
+</style>
+
+<script>
+  function mover(elem, inicio, final, passo, callback) {
+    const novoInicio = inicio - passo
+
+    if (novoInicio >= final) {
+      elem.style.left = novoInicio + 'px'
+      setTimeout(() => mover(elem, novoInicio, final, passo, callback), 7)
+    } else {
+      callback()
+    }
+  }
+
+  const p = document.querySelector('[wm-slider] > p')
+  p.style.display = 'block'
+
+  mover(p, 1500, -520, 5, () => {
+    p = document.querySelector('[wm-slider] > p')
+    p.style.display = 'block'
+  })
+</script>
