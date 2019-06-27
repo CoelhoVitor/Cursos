@@ -1,3 +1,9 @@
+<!--
+    Ordem de prioridade das cores:
+    Inline
+    Externo e Interno (o que for processado por último)
+-->
+
 <!DOCTYPE html>
 <html>
 
@@ -5,11 +11,18 @@
     <meta charset="UTF-8">
     <title>Origem CSS: Externo, Interno e Inline</title>
     <style>
-        /* ... */
+        /* Interno */
+        body {
+            background-color: aquamarine;
+        }
     </style>
+    <!-- Externo -->
+    <link rel="stylesheet" href="css/estilo.css">
 </head>
 
-<body>
+<!-- Inline -->
+
+<body style="background-color:coral;">
     <h1>E agora?</h1>
 </body>
 
