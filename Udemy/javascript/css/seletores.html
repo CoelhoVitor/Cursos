@@ -6,7 +6,93 @@
     <title>CSS Selectors</title>
     <link rel="stylesheet" href="css/tag.css">
     <style>
-        /* ... */
+        /* Seletor Universal */
+        * {
+            color: #ff0;
+            background-color: #f77;
+        }
+
+        /* Seletor de Classe */
+        .tag {
+            color: green;
+            background-color: brown;
+        }
+
+        /* Seletor de Id */
+        #aninhado {
+            color: coral;
+            background-color: chartreuse;
+        }
+
+        /* Seletor de Id aninhado */
+        #aninhado>div {
+            color: darksalmon;
+            background-color: darkcyan;
+        }
+
+        /* Seletor  de descendente */
+        #aninhado section {
+            color: dimgray;
+            background-color: deeppink;
+        }
+
+        /* Seletor de irmão adjacente */
+        p+ul {
+            color: navy;
+            background-color: white;
+        }
+
+        /*Seletor de irmãos adjacentes e não adjacentes*/
+        p~ul {
+            color: yellowgreen;
+        }
+
+        p~ol {
+            color: black;
+        }
+
+        /*Seletor de Atributo*/
+        [feira] {
+            background-color: purple;
+        }
+
+        /*Seletor de Atributo Específico*/
+        /* Seleciona exatamente o que pede */
+        [feira=casa] {
+            color: turquoise;
+        }
+
+        /*Seletor de Atributos Específicos e Compostos*/
+        /* Seleciona caso contenha 'escritorio' */
+        [feira~=escritorio] {
+            color: gold;
+        }
+
+        /*Seletor de Atributo por 'Termos'*/
+        /* Seleciona qualquer tag que tenha 'sa' */
+        [feira*=sa] {
+            color: orangered;
+        }
+
+        /* Dentro da Section primeiro elemento | section nolabel*/
+        /* section > :nth-child(1) {
+            color: darkblue;
+        } */
+
+        /* Dentro da Section elementos ímpares | section nolabel*/
+        section> :nth-child(odd) {
+            color: darkblue;
+        }
+
+        /*ol sem nolabel.. pares viram ímpares.. pq label =1*/
+        ol :nth-child(even) {
+            color: darkred;
+        }
+
+        /*2o span da section*/
+        section>span:nth-of-type(2) {
+            background-color: rgb(204, 21, 158);
+        }
     </style>
 </head>
 
