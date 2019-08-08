@@ -20,7 +20,7 @@ function Barreira(reversa = false) {
 // b.setAltura(300)
 // document.querySelector('[wm-flappy]').appendChild(b.elemento)
 
-function ParDeBarreiras(altura, abertura, x) {
+function parDeBarreiras(altura, abertura, x) {
   this.elemento = novoElemento('div', 'par-de-barreiras')
 
   this.superior = new Barreira(true)
@@ -50,10 +50,10 @@ function ParDeBarreiras(altura, abertura, x) {
 
 function criaBarreiras(altura, largura, abertura, espaco, notificarPonto) {
   this.pares = [
-    new ParDeBarreiras(altura, abertura, largura),
-    new ParDeBarreiras(altura, abertura, largura + espaco),
-    new ParDeBarreiras(altura, abertura, largura + espaco * 2),
-    new ParDeBarreiras(altura, abertura, largura + espaco * 3)
+    new parDeBarreiras(altura, abertura, largura),
+    new parDeBarreiras(altura, abertura, largura + espaco),
+    new parDeBarreiras(altura, abertura, largura + espaco * 2),
+    new parDeBarreiras(altura, abertura, largura + espaco * 3)
   ]
 
   const deslocamento = 3
@@ -128,6 +128,36 @@ function Progresso() {
 //   passaro.animar()
 // }, 20);
 
+function estaoSobrepostos(elementoA, elementoB) {
+  const a = elementoA.getBoundingClientRect()
+  const b = elementoB.getBoundingClientRect()
+
+  const ladoDireitoA = a.left + a.width
+  const ladoDireitoB = b.left + b.width
+
+  const ladoBaixoA = a.top + a.height
+  const ladoBaixoB = b.top + b.height
+
+  const horizontal = ladoDireitoA >= b.left && ladoDireitoB >= a.left
+  const vertical = ladoBaixoA >= b.top && ladoBaixoB >= a.top
+
+  return horizontal && vertical
+}
+
+function colidiu(passaro, barreiras) {
+  let colidiu = false
+  barreiras.pares.forEach(parDeBarreiras => {
+    if (!colidiu) {
+      const superior = parDeBarreiras.superior.elemento
+      const inferior = parDeBarreiras.inferior.elemento
+      colidiu = estaoSobrepostos(passaro.elemento, superior) 
+        || estaoSobrepostos(passaro.elemento, inferior)
+    }
+  })
+  return colidiu
+}
+
+
 function FlappyBird() {
   let pontos = 0
 
@@ -148,6 +178,10 @@ function FlappyBird() {
     const temporizador = setInterval(() => {
       barreiras.animar()
       passaro.animar()
+
+      if (colidiu(passaro, barreiras)) {
+        clearInterval(temporizador)
+      }
     }, 20)
   }
 }
