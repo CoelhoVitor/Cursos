@@ -1,3 +1,3 @@
 module.exports = {
-  uri: 'mongodb+srv://root:<password>@mongonode-ozyb8.mongodb.net/test?retryWrites=true&w=majority'
+  uri: 'mongodb+srv://root:root@mongonode-ozyb8.mongodb.net/test?retryWrites=true&w=majority'
 }
