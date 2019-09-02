@@ -52,13 +52,27 @@ class AppointmentController {
      * Check if provider_id is a provider
      */
     const isProvider = await User.findOne({
-      where: { id: provider_id, provider: true },
+      where: {
+        id: provider_id,
+        provider: true,
+      },
     });
 
     if (!isProvider) {
-      res
+      return res
         .status(401)
         .json({ error: 'You can only create appointments with providers' });
+    }
+
+    /**
+     * Check if provider_id == user_id
+     */
+    const providerIsUser = req.userId === provider_id;
+
+    if (providerIsUser) {
+      return res
+        .status(401)
+        .json({ error: 'You can not create appointments with yourself' });
     }
 
     /**
