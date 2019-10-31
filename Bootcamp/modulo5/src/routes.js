@@ -11,7 +11,7 @@ export default function Routes() {
       {/* garante que apenas uma rota seja chamada por momento */}
       <Switch>
         <Route path="/" exact component={Main} />
-        <Route path="/repository" component={Repository} />
+        <Route path="/repository/:repository" component={Repository} />
       </Switch>
     </BrowserRouter>
   );
