@@ -31,6 +31,7 @@ module.exports = {
       { extensions: ['.jsx', '.js'] }
     ],
     'import/prefer-default-export': 'off',
-    'react/state-in-constructor': ['off', 'never']
+    'react/state-in-constructor': ['off', 'never'],
+    'react/static-property-placement': 'off'
   },
 };
