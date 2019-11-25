@@ -9,14 +9,14 @@ export default class Main extends Component {
     topicos: [],
   };
 
-  // async componentDidMount() {
-  //   const topicos = await api.get("/topicos/:1");
-  //   this.setState({ topicos: JSON.parse(topicos) });
-  // }
-
   async componentDidMount() {
-    api.get('/').then(response => {console.log(response.data);});
+    const topicos = await api.get("/topicos/1");
+    this.setState({ topicos: JSON.parse(topicos) });
   }
+
+  // async componentDidMount() {
+  //   api.get('/topicos').then(response => {console.log(response.data);});
+  // }
   
   render() {
     const { topicos } = this.state;
