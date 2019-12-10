@@ -9,10 +9,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const storage = multer.diskStorage({
-  destination: function(req, file, callback) {
+  destination: function (req, file, callback) {
     callback(null, "./upload");
   },
-  filename: function(req, file, callback) {
+  filename: function (req, file, callback) {
     callback(null, `${Date.now()}_${file.originalname}`);
   }
 });
@@ -35,5 +35,12 @@ app.post("/formulario", (req, res) => {
     id: 1
   });
 });
+
+app.get("/parOuImpar", (req, res) => {
+  const par = parseInt(req.query.numero) % 2 === 0;
+  res.send({
+    resultado: par ? 'par' : 'impar'
+  })
+})
 
 app.listen(8080);
