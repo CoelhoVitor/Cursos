@@ -1,24 +1,18 @@
 package br.com.alura.forum.modelo;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
 @Entity
 @EqualsAndHashCode
+@NoArgsConstructor
+@Data
 public class Topico {
 
 	@Id
@@ -43,49 +37,10 @@ public class Topico {
 	@OneToMany(mappedBy = "topico")
 	private List<Resposta> respostas = new ArrayList<>();
 
-	public Topico() {
-	}
-
 	public Topico(String titulo, String mensagem, Curso curso) {
 		super();
 		this.titulo = titulo;
 		this.mensagem = mensagem;
 		this.curso = curso;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
-	public String getMensagem() {
-		return mensagem;
-	}
-
-	public void setMensagem(String mensagem) {
-		this.mensagem = mensagem;
-	}
-
-	public LocalDateTime getDataCriacao() {
-		return dataCriacao;
-	}
-
-	public StatusTopico getStatus() {
-		return status;
-	}
-
-	public Usuario getAutor() {
-		return autor;
-	}
-
-	public List<Resposta> getRespostas() {
-		return respostas;
 	}
 }
