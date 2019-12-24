@@ -1,20 +1,26 @@
 <template>
-  <div>
-    <h1>{{ title }}</h1>
+  <div class="body">
+    <h1 class="title">{{ title }}</h1>
 
-    <ul>
-      <li v-for="picture in pictures" :key="picture">
-        <img :src="picture.url" :alt="picture.title" />
+    <ul class="list">
+      <li class="item-list" v-for="picture in pictures" :key="picture">
+        <Panel :title="picture.titulo">
+          <img class="responsive-image" :src="picture.url" :alt="picture.titulo" />
+        </Panel>
       </li>
     </ul>
   </div>
 </template>
 
+
 <script>
+import Panel from "./components/shared/panel/Panel.vue";
+
 export default {
+  components: { Panel },
   data() {
     return {
-      title: "Alurapic",
+      title: "alurapic",
       pictures: []
     };
   },
@@ -28,4 +34,25 @@ export default {
 </script>
 
 <style>
+.body {
+  margin: 0 auto;
+  font-family: Helvetica, sans-serif;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+.list {
+  list-style: none;
+}
+
+.item-list {
+  display: inline-block;
+}
+
+.responsive-image {
+  width: 100%;
+}
 </style>
