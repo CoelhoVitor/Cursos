@@ -1,35 +1,18 @@
 <template>
   <div class="body">
-    <h1 class="title">{{ title }}</h1>
+    <Menu></Menu>
 
-    <ul class="list">
-      <li class="item-list" v-for="picture in pictures" :key="picture">
-        <Panel :title="picture.titulo">
-          <img class="responsive-image" :src="picture.url" :alt="picture.titulo" />
-        </Panel>
-      </li>
-    </ul>
+    <transition name="page">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
-
 <script>
-import Panel from "./components/shared/panel/Panel.vue";
+import Menu from "./components/shared/menu/Menu.vue";
 
 export default {
-  components: { Panel },
-  data() {
-    return {
-      title: "alurapic",
-      pictures: []
-    };
-  },
-  created() {
-    this.$http
-      .get("http://localhost:3000/v1/fotos")
-      .then(res => res.json())
-      .then(pics => (this.pictures = pics), err => console.log(err));
-  }
+  components: { Menu }
 };
 </script>
 
@@ -39,20 +22,13 @@ export default {
   font-family: Helvetica, sans-serif;
 }
 
-.title {
-  display: flex;
-  justify-content: center;
+.page-enter,
+.page-leave-to {
+  opacity: 0;
 }
 
-.list {
-  list-style: none;
-}
-
-.item-list {
-  display: inline-block;
-}
-
-.responsive-image {
-  width: 100%;
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
 }
 </style>
