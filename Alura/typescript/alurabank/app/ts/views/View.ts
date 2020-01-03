@@ -1,4 +1,4 @@
-import { ExecutionTimeLog } from "../helpers/decorators/index";
+import { executionTimeLog } from "../helpers/decorators/index";
 
 export abstract class View<T> {
   protected _element: JQuery;

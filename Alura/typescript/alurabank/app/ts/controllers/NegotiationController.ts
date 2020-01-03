@@ -1,6 +1,8 @@
-import { Negotiation, Negotiations } from "../models/index";
+import { Negotiation, Negotiations, PartialNegotiation } from "../models/index";
 import { MessageView, NegotiationsView } from "../views/index";
-import { domInject } from "../helpers/decorators/index";
+import { domInject, throttle } from "../helpers/decorators/index";
+
+let timer = 0;
 
 export class NegotiationController {
   // private _inputDate: HTMLInputElement;
@@ -20,9 +22,6 @@ export class NegotiationController {
 
   constructor() {
     // this._inputDate = <HTMLInputElement>document.querySelector("#data");
-    this._inputDate = $("#data");
-    this._inputAmount = $("#quantidade");
-    this._inputValue = $("#valor");
 
     this._negotiationsView.update(this._negotiations);
   }
@@ -31,9 +30,8 @@ export class NegotiationController {
     return date.getDay() != WeekDay.Saturday && date.getDay() != WeekDay.Sunday;
   }
 
-  add(event: Event): void {
-    event.preventDefault();
-
+  @throttle()
+  add(): void {
     let date = new Date(this._inputDate.val().toString());
 
     if (!this._isBusinessDay(date)) {
@@ -43,21 +41,37 @@ export class NegotiationController {
     const negotiation = new Negotiation(
       //new Date(this._inputDate.value.replace(/-/g, ",")),
       // this._inputDate.valueAsDate,
-      new Date(this._inputDate.val().toString()),
+      date,
       parseInt(this._inputAmount.val().toString()),
       parseFloat(this._inputValue.val().toString())
     );
-
-    this._negotiations.toArray().forEach(negotiation => {
-      console.log(negotiation.date);
-      console.log(negotiation.amount);
-      console.log(negotiation.value);
-    });
 
     this._negotiations.add(negotiation);
 
     this._negotiationsView.update(this._negotiations);
     this._messageView.update("Negociação adicionada com sucesso!");
+  }
+
+  @throttle()
+  importData() {
+    function isOk(res: Response) {
+      if (res.ok) {
+        return res;
+      } else {
+        throw new Error(res.statusText);
+      }
+    }
+
+    fetch("http://localhost:8080/dados")
+      .then(res => isOk(res))
+      .then(res => res.json())
+      .then((datas: PartialNegotiation[]) => {
+        datas
+          .map(data => new Negotiation(new Date(), data.vezes, data.montante))
+          .forEach(negotitation => this._negotiations.add(negotitation));
+        this._negotiationsView.update(this._negotiations);
+      })
+      .catch(err => console.log(err.message));
   }
 }
 

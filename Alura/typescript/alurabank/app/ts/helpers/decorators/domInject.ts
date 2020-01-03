@@ -4,6 +4,7 @@ export function domInject(selector: string) {
 
     const getter = function() {
       if (!element) {
+        // console.log(`buscando  ${selector} para injetar em ${key}`);
         element = $(selector);
       }
 

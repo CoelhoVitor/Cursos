@@ -9,3 +9,4 @@ document
 */
 
 $(".form").submit(controller.add.bind(controller));
+$("#botao-importa").click(controller.importData.bind(controller));
