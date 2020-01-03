@@ -1,4 +1,4 @@
-class Negotiation {
+export class Negotiation {
   /*
   private _date: Date;
   private _amount: number;
