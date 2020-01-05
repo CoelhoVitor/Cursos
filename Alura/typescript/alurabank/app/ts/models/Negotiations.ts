@@ -1,6 +1,6 @@
-import { Negotiation } from "./Negotiation";
+import { Negotiation, MyObject } from "./index";
 
-export class Negotiations {
+export class Negotiations implements MyObject<Negotiations> {
   // private _negotiations: Negotiation[] = [];
   private _negotiations: Array<Negotiation> = [];
 
@@ -10,5 +10,17 @@ export class Negotiations {
 
   toArray(): Negotiation[] {
     return ([] as Negotiation[]).concat(this._negotiations);
+  }
+
+  toText(): void {
+    console.log("-- toText --");
+    console.log(JSON.stringify(this._negotiations));
+  }
+
+  isEqual(negotiations: Negotiations): boolean {
+    return (
+      JSON.stringify(this._negotiations) ==
+      JSON.stringify(negotiations.toArray())
+    );
   }
 }

@@ -1,6 +1,8 @@
-import { Negotiation, Negotiations, PartialNegotiation } from "../models/index";
+import { Negotiation, Negotiations } from "../models/index";
 import { MessageView, NegotiationsView } from "../views/index";
+import { NegotiationService } from "../services/index";
 import { domInject, throttle } from "../helpers/decorators/index";
+import { print } from "../helpers/index";
 
 let timer = 0;
 
@@ -19,6 +21,8 @@ export class NegotiationController {
   private _negotiations = new Negotiations();
   private _negotiationsView = new NegotiationsView("#negociacoesView", true);
   private _messageView = new MessageView("#mensagemView");
+
+  private _service = new NegotiationService();
 
   constructor() {
     // this._inputDate = <HTMLInputElement>document.querySelector("#data");
@@ -50,6 +54,8 @@ export class NegotiationController {
 
     this._negotiationsView.update(this._negotiations);
     this._messageView.update("Negociação adicionada com sucesso!");
+
+    print(negotiation, this._negotiations);
   }
 
   @throttle()
@@ -62,16 +68,19 @@ export class NegotiationController {
       }
     }
 
-    fetch("http://localhost:8080/dados")
-      .then(res => isOk(res))
-      .then(res => res.json())
-      .then((datas: PartialNegotiation[]) => {
-        datas
-          .map(data => new Negotiation(new Date(), data.vezes, data.montante))
-          .forEach(negotitation => this._negotiations.add(negotitation));
-        this._negotiationsView.update(this._negotiations);
-      })
-      .catch(err => console.log(err.message));
+    this._service.getNegotiations(isOk).then(negotiationsToImport => {
+      const negotiationsAlreadyImported = this._negotiations.toArray();
+
+      negotiationsToImport
+        .filter(
+          negotiation =>
+            !negotiationsAlreadyImported.some(alreadyImported =>
+              negotiation.isEqual(alreadyImported)
+            )
+        )
+        .forEach(negotiation => this._negotiations.add(negotiation));
+      this._negotiationsView.update(this._negotiations);
+    });
   }
 }
 
