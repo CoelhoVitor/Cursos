@@ -1,3 +1,5 @@
+import { NegotiationController } from "./controllers/NegotiationController";
+
 const controller = new NegotiationController();
 
 /*
@@ -7,3 +9,4 @@ document
 */
 
 $(".form").submit(controller.add.bind(controller));
+$("#botao-importa").click(controller.importData.bind(controller));
