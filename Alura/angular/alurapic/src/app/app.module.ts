@@ -7,6 +7,7 @@ import { AppComponent } from "./app.component";
 import { PhotosModule } from "./photos/photos.module";
 import { ErrorsModule } from "./errors/errors.module";
 import { DarkenOnHoverModule } from "./shared/directives/darken-on-hover/darken-on-hover.module";
+import { HomeModule } from "./home/home.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,7 +16,8 @@ import { DarkenOnHoverModule } from "./shared/directives/darken-on-hover/darken-
     AppRoutingModule,
     PhotosModule,
     ErrorsModule,
-    DarkenOnHoverModule
+    DarkenOnHoverModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
