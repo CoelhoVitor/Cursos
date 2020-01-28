@@ -3,7 +3,7 @@
 }
 
 body {
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
   font-size: 14px;
 }
 
@@ -26,7 +26,7 @@ header h2 {
 }
 
 header .container:before {
-  content: "";
+  content: '';
   display: inline-block;
   height: 100%;
   vertical-align: middle;
@@ -118,7 +118,7 @@ button:active {
   border: 0;
 }
 
-button[disabled="disabled"],
+button[disabled='disabled'],
 button:disabled {
   background-color: gray;
   border-color: darkgray;
@@ -134,4 +134,19 @@ button:disabled {
 
 .paciente-invalido {
   background-color: lightcoral;
+}
+
+#mensagens-erro {
+  color: red;
+}
+
+.fadeOut {
+  opacity: 0;
+  transition: 0.5s;
+}
+
+#filtrar-tabela {
+  width: 200px;
+  height: 35px;
+  margin-bottom: 10px;
 }
