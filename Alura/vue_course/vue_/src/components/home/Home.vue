@@ -16,7 +16,11 @@
         :key="picture.titulo"
       >
         <Panel :title="picture.titulo">
-          <ResponsiveImage :url="picture.url" :title="picture.titulo" />
+          <ResponsiveImage
+            :url="picture.url"
+            :title="picture.titulo"
+            v-my-transform:scale.animate="1.5"
+          />
           <Button
             type="button"
             label="remove"
@@ -35,8 +39,13 @@ import Panel from "../shared/panel/Panel.vue";
 import ResponsiveImage from "../shared/responsive-image/ResponsiveImage.vue";
 import Button from "../shared/button/Button.vue";
 
+import transform from "../../directives/Transform";
+
 export default {
   components: { Panel, ResponsiveImage, Button },
+  directives: {
+    "my-transform": transform
+  },
   data() {
     return {
       title: "alurapic",

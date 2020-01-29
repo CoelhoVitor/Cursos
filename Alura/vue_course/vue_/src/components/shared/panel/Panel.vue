@@ -65,4 +65,8 @@ export default {
 .panel-fade-leave-active {
   transition: opacity 0.5s;
 }
+
+.panel-content {
+  overflow: hidden;
+}
 </style>
