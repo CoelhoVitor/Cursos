@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1 class="centralized">register</h1>
-    <h2 class="centralized">{{ picture.title }}</h2>
+    <h1 v-if="picture._id" class="centralized">change</h1>
+    <h1 v-else class="centralized">inclusion</h1>
 
     <form @submit.prevent="record()">
       <div class="control">
@@ -12,7 +12,7 @@
       <div class="control">
         <label for="url">URL</label>
         <input v-model.lazy="picture.url" id="url" autocomplete="off" />
-        <imagem-responsiva
+        <ResponsiveImage
           v-show="picture.url"
           :url="picture.url"
           :title="picture.titulo"
@@ -29,10 +29,10 @@
       </div>
 
       <div class="centralized">
-        <my-button label="RECORD" type="submit" />
+        <Button label="RECORD" type="submit" />
 
-        <router-link to="/">
-          <my-button label="BACK" type="button" />
+        <router-link :to="{ name: 'home' }">
+          <Button label="BACK" type="button" />
         </router-link>
       </div>
     </form>
@@ -44,20 +44,33 @@ import ResponsiveImage from "../shared/responsive-image/ResponsiveImage";
 import Button from "../shared/button/Button";
 import Picture from "../../domain/picture/Picture";
 
+import PictureService from "../../domain/picture/PictureService";
+
 export default {
   components: {
-    "responsive-image": ResponsiveImage,
-    "my-button": Button
+    ResponsiveImage,
+    Button
   },
   data() {
     return {
-      picture: new Picture()
+      picture: new Picture(),
+      id: this.$route.params.id
     };
+  },
+  created() {
+    this.service = new PictureService(this.$resource);
+
+    if (this.id) {
+      this.service.search(this.id).then(picture => (this.picture = picture));
+    }
   },
   methods: {
     record() {
-      this.$http.post("http://localhost:3000/v1/fotos", this.picture).then(
-        () => (this.picture = new Picture()),
+      this.service.register(this.picture).then(
+        () => {
+          if (this.id) this.$router.push({ name: "home" });
+          this.picture = new Picture();
+        },
         err => console.log(err)
       );
     }

@@ -2,6 +2,8 @@
   <div>
     <h1 class="title">{{ title }}</h1>
 
+    <p v-show="message" class="centralized">{{ message }}</p>
+
     <input
       type="text"
       class="filter"
@@ -21,6 +23,11 @@
             :title="picture.titulo"
             v-my-transform:scale.animate="1.5"
           />
+
+          <router-link :to="{ name: 'change', params: { id: picture._id } }">
+            <Button label="change" type="button" />
+          </router-link>
+
           <Button
             type="button"
             label="remove"
@@ -39,6 +46,8 @@ import Panel from "../shared/panel/Panel.vue";
 import ResponsiveImage from "../shared/responsive-image/ResponsiveImage.vue";
 import Button from "../shared/button/Button.vue";
 
+import PictureService from "../../domain/picture/PictureService";
+
 import transform from "../../directives/Transform";
 
 export default {
@@ -50,17 +59,16 @@ export default {
     return {
       title: "alurapic",
       pictures: [],
-      filter: []
+      filter: "",
+      message: ""
     };
   },
   created() {
-    this.$http
-      .get("http://localhost:3000/v1/fotos")
-      .then(res => res.json())
-      .then(
-        pics => (this.pictures = pics),
-        err => console.log(err)
-      );
+    this.service = new PictureService(this.$resource);
+    this.service.list().then(
+      pics => (this.pictures = pics),
+      err => (this.message = err.message)
+    );
   },
   computed: {
     picturesWithFilter() {
@@ -74,7 +82,14 @@ export default {
   },
   methods: {
     remove(picture) {
-      alert("removing pic " + picture.titulo);
+      this.service.remove(picture._id).then(
+        () => {
+          let index = this.pictures.indexOf(picture);
+          this.pictures.splice(index, 1);
+          this.message = "Foto removida com sucesso";
+        },
+        err => (this.message = err.message)
+      );
     }
   }
 };

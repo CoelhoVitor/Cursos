@@ -2,9 +2,9 @@
   <nav>
     <ul>
       <li class="item" v-for="route in routes" :key="route.path">
-        <router-link class="router" :to="route.path">{{
-          route.title
-        }}</router-link>
+        <router-link class="router" :to="route.path">
+          {{ route.title }}
+        </router-link>
       </li>
     </ul>
   </nav>
@@ -15,7 +15,7 @@ import { routes } from "../../../routes";
 export default {
   data() {
     return {
-      routes
+      routes: routes.filter(route => route.menu)
     };
   }
 };

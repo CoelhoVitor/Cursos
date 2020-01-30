@@ -4,12 +4,28 @@ import Home from "./components/home/Home.vue";
 export const routes = [
   {
     path: "/",
+    name: "home",
     component: Home,
-    title: "home"
+    title: "Home",
+    menu: true
   },
   {
     path: "/register",
+    name: "register",
     component: Register,
-    title: "register"
+    title: "Register",
+    menu: true
+  },
+  {
+    path: "/register/:id",
+    name: "change",
+    component: Register,
+    title: "Register",
+    menu: false
+  },
+  {
+    path: "*",
+    component: Home,
+    menu: false
   }
 ];
