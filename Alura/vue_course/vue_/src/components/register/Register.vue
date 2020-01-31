@@ -6,12 +6,33 @@
     <form @submit.prevent="record()">
       <div class="control">
         <label for="title">TITLE</label>
-        <input v-model.lazy="picture.titulo" id="title" autocomplete="off" />
+        <input
+          name="title"
+          v-model="picture.titulo"
+          id="title"
+          autocomplete="off"
+          v-validate
+          data-vv-as="títle"
+          data-vv-rules="required|min:3|max:30"
+        />
+        <span class="error" v-show="errors.has('title')">{{
+          errors.first("title")
+        }}</span>
       </div>
 
       <div class="control">
         <label for="url">URL</label>
-        <input v-model.lazy="picture.url" id="url" autocomplete="off" />
+        <input
+          name="url"
+          v-model="picture.url"
+          id="url"
+          autocomplete="off"
+          v-validate
+          data-vv-rules="required"
+        />
+        <span class="error" v-show="errors.has('url')">{{
+          errors.first("url")
+        }}</span>
         <ResponsiveImage
           v-show="picture.url"
           :url="picture.url"
@@ -66,13 +87,17 @@ export default {
   },
   methods: {
     record() {
-      this.service.register(this.picture).then(
-        () => {
-          if (this.id) this.$router.push({ name: "home" });
-          this.picture = new Picture();
-        },
-        err => console.log(err)
-      );
+      this.$validator.validateAll().then(success => {
+        if (success) {
+          this.service.register(this.picture).then(
+            () => {
+              if (this.id) this.$router.push({ name: "home" });
+              this.picture = new Picture();
+            },
+            err => console.log(err)
+          );
+        }
+      });
     }
   }
 };
@@ -98,5 +123,9 @@ export default {
   width: 100%;
   font-size: inherit;
   border-radius: 5px;
+}
+
+.error {
+  color: red;
 }
 </style>

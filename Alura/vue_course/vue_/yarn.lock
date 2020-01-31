@@ -5187,6 +5187,11 @@ vary@~1.1.2:
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
 
+vee-validate@2.0.0-beta.18:
+  version "2.0.0-beta.18"
+  resolved "https://registry.yarnpkg.com/vee-validate/-/vee-validate-2.0.0-beta.18.tgz#ce79ae42d69a8fd7ebebde3effdfa2e2d9e112ef"
+  integrity sha1-znmuQtaaj9fr694+/9+i4tnhEu8=
+
 vendors@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/vendors/-/vendors-1.0.3.tgz#a6467781abd366217c050f8202e7e50cc9eef8c0"
