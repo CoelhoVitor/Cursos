@@ -1,5 +1,6 @@
 <template>
   <div>
+    <img src="/static/test.png" />
     <h1 class="title">{{ title }}</h1>
 
     <p v-show="message" class="centralized">{{ message }}</p>

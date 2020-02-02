@@ -39,22 +39,6 @@ export default {
 };
 </script>
 
-<style scoped>
-.button {
-  border: 0;
-  border-radius: 1px;
-  margin-top: 10px;
-  font-size: 1.2em;
-  width: 100%;
-}
-
-.danger-button {
-  background: firebrick;
-  color: white;
-}
-
-.standard-button {
-  background: darkcyan;
-  color: white;
-}
+<style scoped lang="sass">
+@import './Button.scss'
 </style>

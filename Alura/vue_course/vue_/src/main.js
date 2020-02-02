@@ -9,6 +9,12 @@ import msg from "./pt_BR";
 
 import "./directives/Transform";
 
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap.js";
+
+import "./assets/css/test.css";
+import "./assets/js/test.js";
+
 Vue.use(VeeValidate, {
   locale: "pt_BR",
   dictionary: {
@@ -25,7 +31,21 @@ const router = new VueRouter({
   mode: "history"
 });
 
-Vue.http.options.root = "http://localhost:3000";
+Vue.http.options.root = process.env.API_URL
+  ? process.env.API_URL
+  : "http://localhost:3000";
+
+Vue.http.interceptors.push((req, next) => {
+  // é possível colocar informações no header antes do envio da requisição
+  req.headers.set("Authorization", "informação de segurança aqui");
+  console.log("Lidando com o request");
+
+  next(res => {
+    console.log("Lidando com a resposta");
+    // é possível acessar os dados da reposta e realizar transformações antes
+    console.log(res.body);
+  });
+});
 
 new Vue({
   el: "#app",
