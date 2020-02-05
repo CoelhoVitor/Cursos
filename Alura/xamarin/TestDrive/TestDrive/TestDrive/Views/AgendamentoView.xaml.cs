@@ -11,6 +11,23 @@ namespace TestDrive.Views
     public partial class AgendamentoView : ContentPage
     {
         public Veiculo Veiculo { get; set; }
+        public string Nome { get; set; }
+        public string Fone { get; set; }
+        public string Email { get; set; }
+
+        DateTime dataAgendamento = DateTime.Today;
+        public DateTime DataAgendamento
+        {
+            get
+            {
+                return dataAgendamento;
+            }
+            set
+            {
+                dataAgendamento = value;
+            }
+        }
+        public TimeSpan HoraAgendamento { get; set; }
 
         public AgendamentoView(Veiculo veiculo)
         {
@@ -18,6 +35,18 @@ namespace TestDrive.Views
 
             Veiculo = veiculo;
             BindingContext = this;
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            DisplayAlert("Agendamento",
+                string.Format(
+                @"Nome: {0}
+                Fone: {1}
+                E-mail: {2}
+                Data Agendamento: {3}
+                Hora Agendamento:{4}",
+                Nome, Fone, Email, DataAgendamento.ToString("dd/MM/yyy"), HoraAgendamento), "OK");
         }
     }
 }

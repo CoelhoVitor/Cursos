@@ -471,3 +471,4 @@ C:\Users\FCAMARA981\Documents\GitHub\Cursos\Alura\xamarin\TestDrive\TestDrive\Te
 C:\Users\FCAMARA981\Documents\GitHub\Cursos\Alura\xamarin\TestDrive\TestDrive\TestDrive.Android\obj\Debug\90\stamp\_GenerateJavaStubs.stamp
 C:\Users\FCAMARA981\Documents\GitHub\Cursos\Alura\xamarin\TestDrive\TestDrive\TestDrive.Android\obj\Debug\90\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\FCAMARA981\Documents\GitHub\Cursos\Alura\xamarin\TestDrive\TestDrive\TestDrive.Android\obj\Debug\90\stamp\_ResolveLibraryProjectImports.stamp
+C:\Users\FCAMARA981\Documents\GitHub\Cursos\Alura\xamarin\TestDrive\TestDrive\TestDrive.Android\obj\Debug\90\stamp\SetupDependenciesForDesigner.stamp
