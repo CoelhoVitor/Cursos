@@ -33,7 +33,7 @@
             </TableRoot>
         </TableView>
 
-        <Button></Button>
+        <Button Text="Agendar" Command="{Binding AgendarCommand}"></Button>
     </StackLayout>
 
 </ContentPage>

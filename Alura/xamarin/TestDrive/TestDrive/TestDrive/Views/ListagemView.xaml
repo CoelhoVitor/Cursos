@@ -2,10 +2,16 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:local="clr-namespace:TestDrive"
+            xmlns:vm="clr-namespace:TestDrive.ViewModels"
             x:Class="TestDrive.Views.ListagemView"
             Title="Test Drive">
 
-    <ListView x:Name="listViewVeiculos" ItemsSource="{Binding Veiculos}" Margin="25" ItemTapped="listViewVeiculos_ItemTapped">
+    <ContentPage.BindingContext>
+        <vm:ListagemViewModel></vm:ListagemViewModel>
+    </ContentPage.BindingContext>
+
+    <ListView x:Name="listViewVeiculos" ItemsSource="{Binding Veiculos}" Margin="25"
+              SelectedItem="{Binding VeiculoSelecionado}">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
