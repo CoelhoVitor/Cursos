@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using TestDrive.Models;
 using Xamarin.Forms;
 
@@ -8,6 +10,8 @@ namespace TestDrive.ViewModels
 {
     public class ListagemViewModel
     {
+        private const string URL_GET_VEICULOS = "http://aluracar.herokuapp.com";
+
         public List<Veiculo> Veiculos { get; set; }
         
         Veiculo veiculoSelecionado;
@@ -31,7 +35,13 @@ namespace TestDrive.ViewModels
 
         public ListagemViewModel()
         {
-            this.Veiculos = new ListagemVeiculos().Veiculos;
+            this.Veiculos = new List<Veiculo>();
+        }
+
+        public async Task GetVeiculos()
+        {
+            HttpClient cliente = new HttpClient();
+            string x = await cliente.GetStringAsync(URL_GET_VEICULOS);
         }
     }
 }
