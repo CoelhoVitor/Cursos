@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,11 +10,11 @@ using Xamarin.Forms;
 
 namespace TestDrive.ViewModels
 {
-    public class ListagemViewModel
+    public class ListagemViewModel : BaseViewModel
     {
         private const string URL_GET_VEICULOS = "http://aluracar.herokuapp.com";
 
-        public List<Veiculo> Veiculos { get; set; }
+        public ObservableCollection<Veiculo> Veiculos { get; set; }
         
         Veiculo veiculoSelecionado;
         public Veiculo VeiculoSelecionado 
@@ -33,15 +35,47 @@ namespace TestDrive.ViewModels
             }
         }
 
+        private bool aguarde;
+        public bool Aguarde
+        {
+            get { return aguarde; }
+            set 
+            {
+                aguarde = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         public ListagemViewModel()
         {
-            this.Veiculos = new List<Veiculo>();
+            this.Veiculos = new ObservableCollection<Veiculo>();
         }
 
         public async Task GetVeiculos()
         {
+            this.Aguarde = true;
             HttpClient cliente = new HttpClient();
-            string x = await cliente.GetStringAsync(URL_GET_VEICULOS);
+            var resultado = await cliente.GetStringAsync(URL_GET_VEICULOS);
+
+            var veiculosJson = JsonConvert.DeserializeObject<VeiculoJson[]>(resultado);
+            
+            foreach (var veiculoJson in veiculosJson)
+            {
+                this.Veiculos.Add(new Veiculo
+                {
+                    Nome = veiculoJson.nome,
+                    Preco = veiculoJson.preco
+                });
+            }
+
+            this.Aguarde = false;
+        }
+
+        class VeiculoJson
+        {
+            public string nome { get; set; }
+            public int preco { get; set; }
         }
     }
 }
