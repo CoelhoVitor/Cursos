@@ -27,25 +27,12 @@ namespace TestDrive.Views
             MessagingCenter.Subscribe<Agendamento>(this, "Agendamento", async (msg) =>
             {
                 bool confirma = await DisplayAlert("Salvar Agendamento",
-                "Deseja mesmo enviar o agendamento?",
-                "Sim", "Não");
+                    "Deseja mesmo enviar o agendamento?",
+                    "Sim", "Não");
 
                 if (confirma)
                 {
-                    this.ViewModel.SalvarAgendamento();
-
-                    await DisplayAlert("Agendamento",
-                    string.Format(
-                    @"Veiculo: {0}
-                    Nome: {1}
-                    Fone: {2}
-                    E-mail: {3}
-                    Data Agendamento: {4}
-                    Hora Agendamento: {5}",
-                    msg.Veiculo.Nome, msg.Nome, msg.Fone,
-                    msg.Email, msg.DataAgendamento.ToString("dd/MM/yyy"),
-                    msg.HoraAgendamento),
-                    "OK");
+                    this.ViewModel.SalvarAgendamento();                    
                 }
             });
 

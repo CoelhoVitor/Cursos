@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
@@ -8,7 +9,7 @@ using Xamarin.Forms;
 
 namespace TestDrive.ViewModels
 {
-    public class AgendamentoViewModel
+    public class AgendamentoViewModel : BaseViewModel
     {
         const string URL_POST_AGENTAMENTO = "https://aluracar.herokuapp.com/salvaragendamento";
 
@@ -38,6 +39,8 @@ namespace TestDrive.ViewModels
             set
             {
                 Agendamento.Nome = value;
+                OnPropertyChanged();
+                ((Command)AgendarCommand).ChangeCanExecute();
             }
         }
 
@@ -51,6 +54,8 @@ namespace TestDrive.ViewModels
             set
             {
                 Agendamento.Fone = value;
+                OnPropertyChanged();
+                ((Command)AgendarCommand).ChangeCanExecute();
             }
         }
 
@@ -64,6 +69,8 @@ namespace TestDrive.ViewModels
             set
             {
                 Agendamento.Email = value;
+                OnPropertyChanged();
+                ((Command)AgendarCommand).ChangeCanExecute();
             }
         }
 
@@ -101,6 +108,11 @@ namespace TestDrive.ViewModels
             this.AgendarCommand = new Command(() =>
             {
                 MessagingCenter.Send(this.Agendamento, "Agendamento");
+            }, () =>
+            {
+                return !string.IsNullOrEmpty(this.Nome)
+                    && !string.IsNullOrEmpty(this.Fone)
+                    && !string.IsNullOrEmpty(this.Email);
             });
         }
 
@@ -108,7 +120,21 @@ namespace TestDrive.ViewModels
         {
             HttpClient cliente = new HttpClient();
 
-            StringContent conteudo = new StringContent("", Encoding.UTF8, "application/json");
+            DateTime dataHoraAgendamento = new DateTime(
+                DataAgendamento.Year, DataAgendamento.Month, DataAgendamento.Day,
+                HoraAgendamento.Hours, HoraAgendamento.Minutes, HoraAgendamento.Seconds);
+
+            string json = JsonConvert.SerializeObject(new
+            {
+                nome = this.Nome,
+                fone = this.Fone,
+                email = this.Email,
+                carro = this.Veiculo.Nome,
+                preco = this.Veiculo.Preco,
+                dataAgendamento = dataHoraAgendamento
+            });
+
+            StringContent conteudo = new StringContent(json, Encoding.UTF8, "application/json");
 
             HttpResponseMessage resposta = await cliente.PostAsync(URL_POST_AGENTAMENTO, conteudo);
 
@@ -118,7 +144,7 @@ namespace TestDrive.ViewModels
             }
             else
             {
-                MessagingCenter.Send(new ArgumentException(), "FalahaAgendamento");
+                MessagingCenter.Send(new ArgumentException(), "FalhaAgendamento");
             }
         }
     }
