@@ -7,10 +7,6 @@
              x:Class="TestDrive.Views.MasterDetailView"
              xmlns:view="clr-namespace:TestDrive.Views">
     
-  <MasterDetailPage.Master>
-    <view:MasterView />
-  </MasterDetailPage.Master>
-    
   <MasterDetailPage.Detail>
     <NavigationPage>
       <x:Arguments>

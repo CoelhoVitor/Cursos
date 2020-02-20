@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace TestDrive.Models
 {
     public class Usuario
@@ -11,5 +8,10 @@ namespace TestDrive.Models
         public string dataNascimento { get; set; }
         public string telefone { get; set; }
         public string email { get; set; }
+    }
+
+    public class ResultadoLogin
+    {
+        public Usuario usuario { get; set; }
     }
 }

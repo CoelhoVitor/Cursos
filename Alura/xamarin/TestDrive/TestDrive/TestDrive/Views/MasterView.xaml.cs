@@ -11,14 +11,43 @@ using Xamarin.Forms.Xaml;
 namespace TestDrive.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MasterView : ContentPage
+    public partial class MasterView : TabbedPage
     {
-        public MasterViewModel ViewModel { get; set; }
         public MasterView(Usuario usuario)
         {
             InitializeComponent();
-            this.ViewModel = new MasterViewModel(usuario);
-            this.BindingContext = this.ViewModel;
+            this.BindingContext = new MasterViewModel(usuario);
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            this.AssinarMensagens();
+        }        
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            this.CancelarMensagens();
+        }        
+
+        private void AssinarMensagens()
+        {
+            MessagingCenter.Subscribe<Usuario>(this, "EditarPerfil", (usuario) =>
+            {
+                this.CurrentPage = this.Children[1];
+            });
+
+            MessagingCenter.Subscribe<Usuario>(this, "SucessoSalvarUsuario", (usuario) =>
+            {
+                this.CurrentPage = this.Children[0];
+            });
+        }
+
+        private void CancelarMensagens()
+        {
+            MessagingCenter.Unsubscribe<Usuario>(this, "EditarPerfil");
+            MessagingCenter.Unsubscribe<Usuario>(this, "SucessoSalvarUsuario");
         }
     }
 }
