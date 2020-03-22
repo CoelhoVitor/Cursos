@@ -1,25 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\FCAMARA981\\Documents\\GitHub\\Cursos\\Alura\\xamarin\\TestDrive\\TestDrive\\TestDrive\\TestDrive.csproj": {}
+    "C:\\Users\\User\\Documents\\Github\\Cursos\\Alura\\xamarin\\TestDrive\\TestDrive\\TestDrive\\TestDrive.csproj": {}
   },
   "projects": {
-    "C:\\Users\\FCAMARA981\\Documents\\GitHub\\Cursos\\Alura\\xamarin\\TestDrive\\TestDrive\\TestDrive\\TestDrive.csproj": {
+    "C:\\Users\\User\\Documents\\Github\\Cursos\\Alura\\xamarin\\TestDrive\\TestDrive\\TestDrive\\TestDrive.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\FCAMARA981\\Documents\\GitHub\\Cursos\\Alura\\xamarin\\TestDrive\\TestDrive\\TestDrive\\TestDrive.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Documents\\Github\\Cursos\\Alura\\xamarin\\TestDrive\\TestDrive\\TestDrive\\TestDrive.csproj",
         "projectName": "TestDrive",
-        "projectPath": "C:\\Users\\FCAMARA981\\Documents\\GitHub\\Cursos\\Alura\\xamarin\\TestDrive\\TestDrive\\TestDrive\\TestDrive.csproj",
-        "packagesPath": "C:\\Users\\FCAMARA981\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\FCAMARA981\\Documents\\GitHub\\Cursos\\Alura\\xamarin\\TestDrive\\TestDrive\\TestDrive\\obj\\",
+        "projectPath": "C:\\Users\\User\\Documents\\Github\\Cursos\\Alura\\xamarin\\TestDrive\\TestDrive\\TestDrive\\TestDrive.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Documents\\Github\\Cursos\\Alura\\xamarin\\TestDrive\\TestDrive\\TestDrive\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\FCAMARA981\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
