@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.IO;
+using System.Windows.Input;
 using TestDrive.Media;
 using TestDrive.Models;
 using Xamarin.Forms;
@@ -49,7 +50,11 @@ namespace TestDrive.ViewModels
 
 		public ImageSource FotoPerfil {
 			get { return fotoPerfil; }
-			private set { this.fotoPerfil = value; }
+			private set
+			{ 
+				this.fotoPerfil = value;
+				OnPropertyChanged();
+			}
 		}
 
 		public ICommand EditarPerfilCommand { get; private set; }
@@ -85,6 +90,11 @@ namespace TestDrive.ViewModels
 			TirarFotoCommand = new Command(() =>
 			{
 				DependencyService.Get<ICamera>().TirarFoto();
+			});
+
+			MessagingCenter.Subscribe<byte[]>(this, "FotoTirada", (bytes) =>
+			{
+				FotoPerfil = ImageSource.FromStream(() => new MemoryStream(bytes));
 			});
 		}
 	}
